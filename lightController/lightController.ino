@@ -38,10 +38,18 @@ TBlendType blends[] = {
     LINEARBLEND,
 };
 
+// messaging
+const byte bufSize = 128;
+char res[bufSize];
+boolean newData = false;
+const char start = '`';
+const char end = '~';
+
 void setup() {
   Serial.begin(9600);
+  while(!Serial) continue;
 
-  delay(3000);  // power-up safety delay
+  delay(2000);  // power-up safety delay
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS)
       .setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
@@ -77,6 +85,42 @@ void loop() {
 
   FastLED.show();
   FastLED.delay(1000 / UPDATES_PER_SECOND);
+}
+
+void readSerial() {
+  static boolean recvInProgress = false;
+  static byte ndx = 0;
+  char rc;
+
+  while (Serial.available() > 0 && newData == false) {
+    rc = Serial.read();
+
+    if (recvInProgress == true) {
+      if (rc != end) {
+        res[ndx] = rc;
+        ndx++;
+        if (ndx >= bufSize) {
+          ndx = bufSize - 1;
+        }
+      } else {
+        res[ndx] = '\0';  // terminate the string
+        recvInProgress = false;
+        ndx = 0;
+        newData = true;
+      }
+    }
+
+    else if (rc == start) {
+      recvInProgress = true;
+    }
+  }
+}
+
+void printSerial() {
+  if (newData) {
+    Serial.println(res);
+    newData = false;
+  }
 }
 
 void fillLEDsFromPaletteColors(uint8_t colorIndex) {
