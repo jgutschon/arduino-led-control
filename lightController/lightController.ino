@@ -2,7 +2,7 @@
 
 #define LED_PIN     7
 #define NUM_LEDS    30
-#define BRIGHTNESS  64
+#define BRIGHT  64
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
 #define UPDATES_PER_SECOND 100
@@ -40,7 +40,7 @@ TBlendType blends[] = {
 
 // messaging
 const byte bufSize = 128;
-char res[bufSize];
+char msg[bufSize];
 boolean newData = false;
 const char start = '`';
 const char end = '~';
@@ -59,22 +59,29 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available()) {
-    char data = Serial.read();
+  readSerial();
+  // printSerial();
 
-    switch (data) {
-      case 'o': // lights on
-        FastLED.setBrightness(BRIGHTNESS);
+  if (newData) {
+    char* channel = strtok(msg, "/");
+    char* setting = strtok(NULL, "/");
+
+    switch (channel) {
+      case "power":
+        lightSwitch(setting);
         break;
-      case 'f': // lights off
-        FastLED.setBrightness(0);
-        break;
-      case 'n': // next palette
-        cyclePalette(data);
-        break;
-      case 'p': // previous palette
-        cyclePalette(data);
-        break;
+      // case "palette":
+      //   setPalette(setting);
+      //   break;
+      // case "blend":
+      //   setBlend(setting);
+      //   break;
+      // case "brightness":
+      //   setBrightness(setting);
+      //   break;
+      // case "speed":
+      //   setSpeed(setting);
+      //   break;
     }
   }
 
@@ -87,6 +94,16 @@ void loop() {
   FastLED.delay(1000 / UPDATES_PER_SECOND);
 }
 
+void lightSwitch(char* setting) {
+  int brightness;
+  setting == "on" ? brightness = BRIGHT : brightness = 0;
+  FastLED.setBrightness(brightness);
+}
+
+// void setPalette(char* setting) {
+//   currentPalette = 
+// }
+
 void readSerial() {
   static boolean recvInProgress = false;
   static byte ndx = 0;
@@ -97,13 +114,13 @@ void readSerial() {
 
     if (recvInProgress == true) {
       if (rc != end) {
-        res[ndx] = rc;
+        msg[ndx] = rc;
         ndx++;
         if (ndx >= bufSize) {
           ndx = bufSize - 1;
         }
       } else {
-        res[ndx] = '\0';  // terminate the string
+        msg[ndx] = '\0';  // terminate the string
         recvInProgress = false;
         ndx = 0;
         newData = true;
@@ -118,7 +135,7 @@ void readSerial() {
 
 void printSerial() {
   if (newData) {
-    Serial.println(res);
+    Serial.println(msg);
     newData = false;
   }
 }
