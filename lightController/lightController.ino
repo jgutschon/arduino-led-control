@@ -1,6 +1,6 @@
 #include <FastLED.h>
-#include "commands.h"
 #include "leds.h"
+#include "commands.h"
 
 CRGBPalette16 palettes[] = {
     RainbowColors_p,
