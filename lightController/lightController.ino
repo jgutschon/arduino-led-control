@@ -1,35 +1,7 @@
 #include <FastLED.h>
 #include "leds.h"
 #include "commands.h"
-
-CRGBPalette16 palettes[] = {
-    RainbowColors_p,
-    RainbowStripeColors_p,
-    OceanColors_p,
-    CloudColors_p,
-    LavaColors_p,
-    ForestColors_p,
-    PartyColors_p,
-    redWhiteBluePalette_p,
-};
-
-TBlendType blends[] = {
-    LINEARBLEND,
-    NOBLEND,
-    LINEARBLEND,
-    LINEARBLEND,
-    LINEARBLEND,
-    LINEARBLEND,
-    NOBLEND,
-    LINEARBLEND,
-};
-
-// messaging
-const uint8_t bufSize = 128;
-char msg[bufSize];
-boolean newData = false;
-const char start = '`';
-const char end = '~';
+#include "message.h"
 
 void setup() {
   Serial.begin(9600);
@@ -78,47 +50,6 @@ void loop() {
 
   FastLED.show();
   FastLED.delay(1000 / UPDATES_PER_SECOND);
-}
-
-// void setPalette(char* setting) {
-//   currentPalette = 
-// }
-
-void readSerial() {
-  static boolean recvInProgress = false;
-  static uint8_t ndx = 0;
-  
-  char rc;
-
-  while (Serial.available() > 0 && newData == false) {
-    rc = Serial.read();
-
-    if (recvInProgress == true) {
-      if (rc != end) {
-        msg[ndx] = rc;
-        ndx++;
-        if (ndx >= bufSize) {
-          ndx = bufSize - 1;
-        }
-      } else {
-        msg[ndx] = '\0';  // terminate the string
-        recvInProgress = false;
-        ndx = 0;
-        newData = true;
-      }
-    }
-
-    else if (rc == start) {
-      recvInProgress = true;
-    }
-  }
-}
-
-void printSerial() {
-  if (newData) {
-    Serial.println(msg);
-    newData = false;
-  }
 }
 
 void fillLEDsFromPaletteColors(uint8_t colorIndex) {
