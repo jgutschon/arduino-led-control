@@ -39,7 +39,7 @@ TBlendType blends[] = {
 };
 
 // messaging
-const byte bufSize = 128;
+const uint8_t bufSize = 128;
 char msg[bufSize];
 boolean newData = false;
 const char start = '`';
@@ -60,29 +60,29 @@ void setup() {
 
 void loop() {
   readSerial();
-  // printSerial();
 
   if (newData) {
     char* channel = strtok(msg, "/");
     char* setting = strtok(NULL, "/");
 
-    switch (channel) {
-      case "power":
-        lightSwitch(setting);
-        break;
-      // case "palette":
-      //   setPalette(setting);
-      //   break;
-      // case "blend":
-      //   setBlend(setting);
-      //   break;
-      // case "brightness":
-      //   setBrightness(setting);
-      //   break;
-      // case "speed":
-      //   setSpeed(setting);
-      //   break;
+    Serial.print("channel: ");
+    Serial.println(channel);
+    Serial.print("setting: ");
+    Serial.println(setting);
+
+    if (strstr(channel, "power")) {
+      lightSwitch(setting);
+    } else if (strstr(channel, "palette")) {
+      Serial.println("palette");
+    } else if (strstr(channel, "blend")) {
+      Serial.println("blend");
+    } else if (strstr(channel, "brightness")) {
+      Serial.println("brightness");
+    } else if (strstr(channel, "speed")) {
+      Serial.println("speed");
     }
+
+    newData = false;
   }
 
   static uint8_t startIndex = 0;
@@ -96,7 +96,12 @@ void loop() {
 
 void lightSwitch(char* setting) {
   int brightness;
-  setting == "on" ? brightness = BRIGHT : brightness = 0;
+  if (strstr(setting, "on")) {
+    brightness = BRIGHT;
+  } else if (strstr(setting, "off")) {
+    brightness = 0;
+  }
+
   FastLED.setBrightness(brightness);
 }
 
@@ -106,7 +111,8 @@ void lightSwitch(char* setting) {
 
 void readSerial() {
   static boolean recvInProgress = false;
-  static byte ndx = 0;
+  static uint8_t ndx = 0;
+  
   char rc;
 
   while (Serial.available() > 0 && newData == false) {
