@@ -19,4 +19,12 @@ extern TBlendType currentBlending;
 extern CRGBPalette16 redWhiteBluePalette;
 extern const TProgmemPalette16 redWhiteBluePalette_p PROGMEM;
 
+extern CRGBPalette16 palettes[];
+extern TBlendType blends[];
+
+void fillLEDsFromPalette(uint8_t colorIndex);
+void cyclePalette(char data);
+void blackAndWhiteStripes();
+void setupPurpleAndGreenPalette();
+
 #endif

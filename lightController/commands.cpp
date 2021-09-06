@@ -10,3 +10,9 @@ void lightSwitch(char* setting) {
 
   FastLED.setBrightness(brightness);
 }
+
+// TODO: other command implementations
+// void setPalette(char* palette);
+// void setBlend(char* blend);
+// void setBrightness(char* brightness);
+// void setSpeed(char* speed);
