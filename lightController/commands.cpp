@@ -11,8 +11,16 @@ void lightSwitch(char* setting) {
   FastLED.setBrightness(brightness);
 }
 
+void setPalette(char* palette) {
+  // placeholder to retain original functionality
+  if (strstr(palette, "next")) {
+    cyclePalette('n');
+  } else if (strstr(palette, "prev")) {
+    cyclePalette('p');
+  }
+}
+
 // TODO: other command implementations
-// void setPalette(char* palette);
 // void setBlend(char* blend);
 // void setBrightness(char* brightness);
 // void setSpeed(char* speed);
