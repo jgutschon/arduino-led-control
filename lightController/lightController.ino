@@ -1,20 +1,6 @@
 #include <FastLED.h>
-
-#define LED_PIN     7
-#define NUM_LEDS    30
-#define BRIGHT  64
-#define LED_TYPE    WS2812B
-#define COLOR_ORDER GRB
-#define UPDATES_PER_SECOND 100
-CRGB leds[NUM_LEDS];
-
-int8_t paletteIndex = 0;
-int8_t paletteSize = 8;
-CRGBPalette16 currentPalette;
-TBlendType currentBlending;
-
-extern CRGBPalette16 myRedWhiteBluePalette;
-extern const TProgmemPalette16 redWhiteBluePalette_p PROGMEM;
+#include "commands.h"
+#include "leds.h"
 
 CRGBPalette16 palettes[] = {
     RainbowColors_p,
@@ -92,17 +78,6 @@ void loop() {
 
   FastLED.show();
   FastLED.delay(1000 / UPDATES_PER_SECOND);
-}
-
-void lightSwitch(char* setting) {
-  int brightness;
-  if (strstr(setting, "on")) {
-    brightness = BRIGHT;
-  } else if (strstr(setting, "off")) {
-    brightness = 0;
-  }
-
-  FastLED.setBrightness(brightness);
 }
 
 // void setPalette(char* setting) {
