@@ -1,4 +1,4 @@
 $port= new-Object System.IO.Ports.SerialPort COM4,9600,None,8,one
 $port.open()
-$port.WriteLine('power/on')
+$port.WriteLine('`power/on~')
 $port.close()
