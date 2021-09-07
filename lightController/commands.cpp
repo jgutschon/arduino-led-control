@@ -1,7 +1,7 @@
 #include "commands.h"
 
 void lightSwitch(char* setting) {
-  int brightness;
+  uint8_t brightness;
   if (strstr(setting, "on")) {
     brightness = BRIGHT;
   } else if (strstr(setting, "off")) {
@@ -13,16 +13,13 @@ void lightSwitch(char* setting) {
 
 void setPalette(char* palette) {
   // placeholder to retain original functionality
-  // if (strstr(palette, "next")) {
-  //   cyclePalette('n');
-  // } else if (strstr(palette, "prev")) {
-  //   cyclePalette('p');
-  // } else {
-    Serial.print("+");
-    Serial.print(palette);
-    Serial.println("+");
+  if (strstr(palette, "next")) {
+    cyclePalette('n');
+  } else if (strstr(palette, "prev")) {
+    cyclePalette('p');
+  } else {
     // currentPalette = paletteMap[palette];
-  // }
+  }
 }
 
 // TODO: other command implementations

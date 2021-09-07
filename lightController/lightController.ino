@@ -5,9 +5,9 @@
 
 void setup() {
   Serial.begin(9600);
-  while(!Serial) continue;
+  while(!Serial);
 
-  Serial.println("Serial started...");
+  Serial.println(F("Serial started..."));
 
   delay(2000);  // power-up safety delay
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(ledStrip, NUM_LEDS)
@@ -25,9 +25,9 @@ void loop() {
     char* channel = strtok(msg, "/");
     char* setting = strtok(NULL, "/");
 
-    Serial.print("channel: ");
+    Serial.print(F("channel: "));
     Serial.println(channel);
-    Serial.print("setting: ");
+    Serial.print(F("setting: "));
     Serial.println(setting);
 
     // placeholder for command methods
@@ -36,11 +36,11 @@ void loop() {
     } else if (strstr(channel, "palette")) {
       setPalette(setting);
     } else if (strstr(channel, "blend")) {
-      Serial.println("blend");
+      Serial.println(F("blend"));
     } else if (strstr(channel, "brightness")) {
-      Serial.println("brightness");
+      Serial.println(F("brightness"));
     } else if (strstr(channel, "speed")) {
-      Serial.println("speed");
+      Serial.println(F("speed"));
     }
 
     newData = false;

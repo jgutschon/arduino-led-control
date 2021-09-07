@@ -1,8 +1,8 @@
 #include "leds.h"
 
 CRGB ledStrip[NUM_LEDS];
-// int8_t paletteIndex = 0;
-// int8_t paletteSize = 8;
+int8_t paletteIndex = 0;
+int8_t paletteSize = 8;
 CRGBPalette16 currentPalette;
 TBlendType currentBlending;
 
@@ -17,27 +17,27 @@ TBlendType currentBlending;
 //   { "redWhiteBluePalette_p", redWhiteBluePalette_p }
 // };
 
-// CRGBPalette16 palettes[] = {
-//     RainbowColors_p,
-//     RainbowStripeColors_p,
-//     OceanColors_p,
-//     CloudColors_p,
-//     LavaColors_p,
-//     ForestColors_p,
-//     PartyColors_p,
-//     redWhiteBluePalette_p,
-// };
+CRGBPalette16 palettes[] = {
+  RainbowColors_p,
+  RainbowStripeColors_p,
+  OceanColors_p,
+  CloudColors_p,
+  LavaColors_p,
+  ForestColors_p,
+  PartyColors_p,
+  redWhiteBluePalette_p,
+};
 
-// TBlendType blends[] = {
-//     LINEARBLEND,
-//     NOBLEND,
-//     LINEARBLEND,
-//     LINEARBLEND,
-//     LINEARBLEND,
-//     LINEARBLEND,
-//     NOBLEND,
-//     LINEARBLEND,
-// };
+TBlendType blends[] = {
+  LINEARBLEND,
+  NOBLEND,
+  LINEARBLEND,
+  LINEARBLEND,
+  LINEARBLEND,
+  LINEARBLEND,
+  NOBLEND,
+  LINEARBLEND,
+};
 
 // control methods
 void fillLEDsFromPalette(uint8_t colorIndex) {
@@ -50,25 +50,25 @@ void fillLEDsFromPalette(uint8_t colorIndex) {
   }
 }
 
-// void cyclePalette(char data) {
-//   if (data == 'n')
-//     paletteIndex++;
-//   else if (data == 'p')
-//     paletteIndex--;
+void cyclePalette(char data) {
+  if (data == 'n')
+    paletteIndex++;
+  else if (data == 'p')
+    paletteIndex--;
 
-//   // keep indexing in array bounds
-//   if (paletteIndex < 0)
-//     paletteIndex = paletteSize - 1;
-//   if (paletteIndex > paletteSize - 1)
-//     paletteIndex = 0;
+  // keep indexing in array bounds
+  if (paletteIndex < 0)
+    paletteIndex = paletteSize - 1;
+  if (paletteIndex > paletteSize - 1)
+    paletteIndex = 0;
 
-//   currentPalette = palettes[paletteIndex];
-//   currentBlending = blends[paletteIndex];
-// }
+  currentPalette = palettes[paletteIndex];
+  currentBlending = blends[paletteIndex];
+}
 
 // Custom Palettes
 // Example static color palette - 64 bytes of flash
-const TProgmemPalette16 redWhiteBluePalette_p PROGMEM = {
+const TProgmemPalette16 redWhiteBluePalette_p = {
   CRGB::Red,
   CRGB::Gray,
   CRGB::Blue,
