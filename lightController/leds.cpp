@@ -6,6 +6,17 @@ int8_t paletteSize = 8;
 CRGBPalette16 currentPalette;
 TBlendType currentBlending;
 
+std::map<char*, CRGBPalette16> paletteMap {
+  { "RainbowColors_p",       RainbowColors_p },
+  { "RainbowStripeColors_p", RainbowStripeColors_p },
+  { "OceanColors_p",         OceanColors_p },
+  { "CloudColors_p",         CloudColors_p },
+  { "LavaColors_p",          LavaColors_p },
+  { "ForestColors_p",        ForestColors_p },
+  { "PartyColors_p",         PartyColors_p },
+  { "redWhiteBluePalette_p", redWhiteBluePalette_p }
+};
+
 CRGBPalette16 palettes[] = {
     RainbowColors_p,
     RainbowStripeColors_p,

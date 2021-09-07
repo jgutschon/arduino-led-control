@@ -2,6 +2,8 @@
 #define LEDS_H
 
 #include <FastLED.h>
+#include "ArduinoSTL.h"
+#include "map"
 
 #define LED_PIN     7
 #define NUM_LEDS    30
@@ -18,6 +20,8 @@ extern TBlendType currentBlending;
 
 extern CRGBPalette16 redWhiteBluePalette;
 extern const TProgmemPalette16 redWhiteBluePalette_p PROGMEM;
+
+extern std::map<char*, CRGBPalette16> paletteMap;
 
 extern CRGBPalette16 palettes[];
 extern TBlendType blends[];
