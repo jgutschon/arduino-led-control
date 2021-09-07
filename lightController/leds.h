@@ -23,11 +23,11 @@ extern const TProgmemPalette16 redWhiteBluePalette_p PROGMEM;
 
 extern std::map<char*, CRGBPalette16> paletteMap;
 
-extern CRGBPalette16 palettes[];
+// extern CRGBPalette16 palettes[];
 extern TBlendType blends[];
 
 void fillLEDsFromPalette(uint8_t colorIndex);
-void cyclePalette(char data);
+// void cyclePalette(char data);
 void blackAndWhiteStripes();
 void setupPurpleAndGreenPalette();
 

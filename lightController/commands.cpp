@@ -13,16 +13,16 @@ void lightSwitch(char* setting) {
 
 void setPalette(char* palette) {
   // placeholder to retain original functionality
-  if (strstr(palette, "next")) {
-    cyclePalette('n');
-  } else if (strstr(palette, "prev")) {
-    cyclePalette('p');
-  } else {
+  // if (strstr(palette, "next")) {
+  //   cyclePalette('n');
+  // } else if (strstr(palette, "prev")) {
+  //   cyclePalette('p');
+  // } else {
     Serial.print("+");
     Serial.print(palette);
     Serial.println("+");
     // currentPalette = paletteMap[palette];
-  }
+  // }
 }
 
 // TODO: other command implementations
