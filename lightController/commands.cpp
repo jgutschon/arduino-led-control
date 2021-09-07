@@ -17,6 +17,11 @@ void setPalette(char* palette) {
     cyclePalette('n');
   } else if (strstr(palette, "prev")) {
     cyclePalette('p');
+  } else {
+    Serial.print("+");
+    Serial.print(palette);
+    Serial.println("+");
+    // currentPalette = paletteMap[palette];
   }
 }
 

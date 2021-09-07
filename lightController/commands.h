@@ -4,5 +4,6 @@
 #include "leds.h"
 
 void lightSwitch(char* setting);
+void setPalette(char* palette);
 
 #endif

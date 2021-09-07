@@ -32,7 +32,7 @@ void loop() {
     if (strstr(channel, "power")) {
       lightSwitch(setting);
     } else if (strstr(channel, "palette")) {
-      Serial.println("palette");
+      setPalette(setting);
     } else if (strstr(channel, "blend")) {
       Serial.println("blend");
     } else if (strstr(channel, "brightness")) {
