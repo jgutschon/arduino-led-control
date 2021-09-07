@@ -7,8 +7,10 @@ void setup() {
   Serial.begin(9600);
   while(!Serial) continue;
 
+  Serial.println("Serial started...");
+
   delay(2000);  // power-up safety delay
-  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS)
+  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(ledStrip, NUM_LEDS)
       .setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHT);
 
@@ -45,7 +47,8 @@ void loop() {
   }
 
   static uint8_t startIndex = 0;
-  startIndex++;  // motion speed
+  // motion speed
+  startIndex++;
 
   fillLEDsFromPalette(startIndex);
 
