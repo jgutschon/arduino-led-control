@@ -3,11 +3,8 @@
 
 #include "leds.h"
 
-extern const uint8_t bufSize;
-extern char msg[];
-extern boolean newData;
-extern const char start;
-extern const char end;
+extern char MSG[];
+extern boolean NEW_DATA;
 
 void readSerial();
 void printSerial();
