@@ -7,7 +7,7 @@ This project is a RGB LED controller for Arduino UNO R3, using WS2812B LEDs, and
 - Select the port belonging to the UNO under `Tools` > `Port`
 
 ### CLI
-The [arduino-cli](https://arduino.github.io/arduino-cli/latest/installation/) may also optionally be used. 
+The [arduino-cli](https://arduino.github.io/arduino-cli/latest/installation/) may also optionally be used.
 
 ## Powershell scripts
-The scripts located in `powershell/` are to be used on Windows in the Group Policy Editor in order to automatically turn on and off the lights upon startup/shutdown, otherwise they will always be on. 
+The scripts located in `powershell/` are to be used on Windows in the Group Policy Editor in order to automatically turn on and off the lights upon startup/shutdown, otherwise they will always be on.
