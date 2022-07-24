@@ -1,8 +1,8 @@
 #include "message.h"
 
 const uint8_t bufSize = 128;
-char msg[bufSize];
-boolean newData = false;
+char MSG[bufSize];
+boolean NEW_DATA = false;
 const char start = '`';
 const char end = '~';
 
@@ -12,21 +12,21 @@ void readSerial() {
   
   char rc;
 
-  while (Serial.available() > 0 && newData == false) {
+  while (Serial.available() > 0 && NEW_DATA == false) {
     rc = Serial.read();
 
     if (recvInProgress == true) {
       if (rc != end) {
-        msg[ndx] = rc;
+        MSG[ndx] = rc;
         ndx++;
         if (ndx >= bufSize) {
           ndx = bufSize - 1;
         }
       } else {
-        msg[ndx] = '\0';  // terminate the string
+        MSG[ndx] = '\0';  // terminate the string
         recvInProgress = false;
         ndx = 0;
-        newData = true;
+        NEW_DATA = true;
       }
     }
 
@@ -37,8 +37,8 @@ void readSerial() {
 }
 
 void printSerial() {
-  if (newData) {
-    Serial.println(msg);
-    newData = false;
+  if (NEW_DATA) {
+    Serial.println(MSG);
+    NEW_DATA = false;
   }
 }

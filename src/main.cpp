@@ -9,7 +9,8 @@ void setup() {
 
   Serial.println(F("Serial started..."));
 
-  delay(2000);  // power-up safety delay
+  // Powerup safety delay
+  delay(2000);
   FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(ledStrip, NUM_LEDS)
       .setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHT);
@@ -21,29 +22,29 @@ void setup() {
 void loop() {
   readSerial();
 
-  if (newData) {
-    char* channel = strtok(msg, "/");
+  if (NEW_DATA) {
+    char* channel = strtok(MSG, "/");
     char* setting = strtok(NULL, "/");
 
-    Serial.print(F("channel: "));
-    Serial.println(channel);
-    Serial.print(F("setting: "));
-    Serial.println(setting);
+    // Serial.print(F("channel: "));
+    // Serial.println(channel);
+    // Serial.print(F("setting: "));
+    // Serial.println(setting);
 
     // placeholder for command methods
     if (strstr(channel, "power")) {
       lightSwitch(setting);
     } else if (strstr(channel, "palette")) {
       setPalette(setting);
-    } else if (strstr(channel, "blend")) {
-      Serial.println(F("blend"));
-    } else if (strstr(channel, "brightness")) {
-      Serial.println(F("brightness"));
-    } else if (strstr(channel, "speed")) {
-      Serial.println(F("speed"));
-    }
+    } //else if (strstr(channel, "blend")) {
+    //   Serial.println(F("blend"));
+    // } else if (strstr(channel, "brightness")) {
+    //   Serial.println(F("brightness"));
+    // } else if (strstr(channel, "speed")) {
+    //   Serial.println(F("speed"));
+    // }
 
-    newData = false;
+    NEW_DATA = false;
   }
 
   static uint8_t startIndex = 0;

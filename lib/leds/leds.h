@@ -6,7 +6,7 @@
 // #include "map"
 
 #define LED_PIN     7
-#define NUM_LEDS    30
+#define NUM_LEDS    60
 #define BRIGHT      64
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
